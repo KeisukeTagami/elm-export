@@ -258,10 +258,10 @@ toElmDecoderSpec =
         "test/CommentDecoderWithOptions.elm"
     describe "Convert to Elm decoder references." $ do
       it "toElmDecoderRef Post" $
-        toElmDecoderRef (Proxy :: Proxy Post) `shouldBe` "decodePost"
+        toElmDecoderRef (Proxy :: Proxy Post) `shouldBe` "succeedPost"
       it "toElmDecoderRef [Comment]" $
         toElmDecoderRef (Proxy :: Proxy [Comment]) `shouldBe`
-        "(list decodeComment)"
+        "(list succeedComment)"
       it "toElmDecoderRef String" $
         toElmDecoderRef (Proxy :: Proxy String) `shouldBe` "string"
       it "toElmDecoderRef (Maybe String)" $

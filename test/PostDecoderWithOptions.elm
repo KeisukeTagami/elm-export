@@ -6,12 +6,12 @@ import Json.Decode.Pipeline exposing (..)
 import PostType exposing (..)
 
 
-decodePost : Decoder Post
-decodePost =
-    decode Post
+succeedPost : Decoder Post
+succeedPost =
+    succeed Post
         |> required "postId" int
         |> required "postName" string
         |> required "postAge" (maybe float)
-        |> required "postComments" (list decodeComment)
-        |> required "postPromoted" (maybe decodeComment)
+        |> required "postComments" (list succeedComment)
+        |> required "postPromoted" (maybe succeedComment)
         |> required "postAuthor" (maybe string)

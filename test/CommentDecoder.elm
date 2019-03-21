@@ -3,6 +3,7 @@ module CommentDecoder exposing (..)
 import CommentType exposing (..)
 import Dict
 import Exts.Json.Decode exposing (..)
+import Iso8601
 import Json.Decode exposing (..)
 import Json.Decode.Pipeline exposing (..)
 
@@ -14,5 +15,5 @@ succeedComment =
         |> required "text" string
         |> required "mainCategories" (map2 (,) (index 0 string) (index 1 string))
         |> required "published" bool
-        |> required "created" decodeDate
+        |> required "created" Iso8601.decoder
         |> required "tags" (map Dict.fromList (list (map2 (,) (index 0 string) (index 1 int))))

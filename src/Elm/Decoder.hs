@@ -1,7 +1,7 @@
-{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE TypeOperators     #-}
 
 module Elm.Decoder
   ( toElmDecoderRef
@@ -10,12 +10,12 @@ module Elm.Decoder
   , toElmDecoderSourceWith
   ) where
 
-import Control.Monad.Reader
-import Data.Monoid
-import qualified Data.Text as T
-import Elm.Common
-import Elm.Type
-import Text.PrettyPrint.Leijen.Text hiding ((<$>), (<>))
+import           Control.Monad.Reader
+import           Data.Monoid
+import qualified Data.Text                    as T
+import           Elm.Common
+import           Elm.Type
+import           Text.PrettyPrint.Leijen.Text hiding ((<$>), (<>))
 
 class HasDecoder a where
   render :: a -> Reader Options Doc
@@ -33,7 +33,7 @@ instance HasDecoder ElmDatatype where
   render (ElmPrimitive primitive) = renderRef primitive
 
 instance HasDecoderRef ElmDatatype where
-  renderRef (ElmDatatype name _) = pure $ "succeed" <> stext name
+  renderRef (ElmDatatype name _)     = pure $ "succeed" <> stext name
   renderRef (ElmPrimitive primitive) = renderRef primitive
 
 instance HasDecoder ElmConstructor where
@@ -73,7 +73,7 @@ instance HasDecoderRef ElmPrimitive where
     return . parens $
       "map2 (,)" <+> parens ("index 0" <+> dx) <+> parens ("index 1" <+> dy)
   renderRef EUnit = pure $ parens "succeed ()"
-  renderRef EDate = pure "decodeDate"
+  renderRef EDate = pure "Iso8601.decoder"
   renderRef EInt = pure "int"
   renderRef EBool = pure "bool"
   renderRef EChar = pure "char"

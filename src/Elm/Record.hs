@@ -7,12 +7,12 @@ module Elm.Record
   , toElmTypeSourceWith
   ) where
 
-import Control.Monad.Reader
-import Data.Monoid
-import qualified Data.Text as T
-import Elm.Common
-import Elm.Type
-import Text.PrettyPrint.Leijen.Text hiding ((<$>), (<>))
+import           Control.Monad.Reader
+import           Data.Monoid
+import qualified Data.Text                    as T
+import           Elm.Common
+import           Elm.Type
+import           Text.PrettyPrint.Leijen.Text hiding ((<$>), (<>))
 
 class HasType a where
   render :: a -> Reader Options Doc
@@ -75,7 +75,7 @@ instance HasTypeRef ElmPrimitive where
     dv <- renderRef v
     return $ "Dict" <+> parens dk <+> parens dv
   renderRef EInt = pure "Int"
-  renderRef EDate = pure "Date"
+  renderRef EDate = pure "Time.Posix"
   renderRef EBool = pure "Bool"
   renderRef EChar = pure "Char"
   renderRef EString = pure "String"

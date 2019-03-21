@@ -7,12 +7,12 @@ module Elm.Encoder
   , toElmEncoderSourceWith
   ) where
 
-import Control.Monad.Reader
-import Data.Monoid
-import qualified Data.Text as T
-import Elm.Common
-import Elm.Type
-import Text.PrettyPrint.Leijen.Text hiding ((<$>), (<>))
+import           Control.Monad.Reader
+import           Data.Monoid
+import qualified Data.Text                    as T
+import           Elm.Common
+import           Elm.Type
+import           Text.PrettyPrint.Leijen.Text hiding ((<$>), (<>))
 
 class HasEncoder a where
   render :: a -> Reader Options Doc
@@ -30,7 +30,7 @@ instance HasEncoder ElmDatatype where
   render (ElmPrimitive primitive) = renderRef primitive
 
 instance HasEncoderRef ElmDatatype where
-  renderRef (ElmDatatype name _) = pure $ "encode" <> stext name
+  renderRef (ElmDatatype name _)     = pure $ "encode" <> stext name
   renderRef (ElmPrimitive primitive) = renderRef primitive
 
 instance HasEncoder ElmConstructor where
@@ -53,7 +53,7 @@ instance HasEncoder ElmValue where
     return $ dx <$$> comma <+> dy
 
 instance HasEncoderRef ElmPrimitive where
-  renderRef EDate = pure $ parens "Json.Encode.string << toString"
+  renderRef EDate = pure $ parens "Json.Encode.string << Iso8601.fromTime"
   renderRef EUnit = pure "Json.Encode.null"
   renderRef EInt = pure "Json.Encode.int"
   renderRef EChar = pure "Json.Encode.char"

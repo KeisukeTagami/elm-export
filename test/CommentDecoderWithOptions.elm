@@ -13,7 +13,7 @@ succeedComment =
     succeed Comment
         |> required "commentPostId" int
         |> required "commentText" string
-        |> required "commentMainCategories" (map2 (,) (index 0 string) (index 1 string))
+        |> required "commentMainCategories" (map2 pair (index 0 string) (index 1 string))
         |> required "commentPublished" bool
         |> required "commentCreated" Iso8601.decoder
-        |> required "commentTags" (map Dict.fromList (list (map2 (,) (index 0 string) (index 1 int))))
+        |> required "commentTags" (map Dict.fromList (list (map2 pair (index 0 string) (index 1 int))))

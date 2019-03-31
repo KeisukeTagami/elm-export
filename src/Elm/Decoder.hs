@@ -71,7 +71,7 @@ instance HasDecoderRef ElmPrimitive where
     dx <- renderRef x
     dy <- renderRef y
     return . parens $
-      "map2 (,)" <+> parens ("index 0" <+> dx) <+> parens ("index 1" <+> dy)
+      "map2 pair" <+> parens ("index 0" <+> dx) <+> parens ("index 1" <+> dy)
   renderRef EUnit = pure $ parens "succeed ()"
   renderRef EDate = pure "Iso8601.decoder"
   renderRef EInt = pure "int"

@@ -37,6 +37,9 @@ instance HasEncoder ElmConstructor where
   render (RecordConstructor _ value) = do
     dv <- render value
     return . nest 4 $ "Json.Encode.object" <$$> "[" <+> dv <$$> "]"
+  render (NamedConstructor _ value) = do
+    dv <- render value
+    return . nest 4 $ "Json.Encode.object" <$$> "[" <+> dv <$$> "]"
 
 instance HasEncoder ElmValue where
   render (ElmField name value) = do
@@ -51,6 +54,8 @@ instance HasEncoder ElmValue where
     dx <- render x
     dy <- render y
     return $ dx <$$> comma <+> dy
+  render ElmEmpty = pure ""
+
 
 instance HasEncoderRef ElmPrimitive where
   renderRef EDate = pure $ parens "Json.Encode.string << Iso8601.fromTime"

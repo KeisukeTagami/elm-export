@@ -11,7 +11,7 @@ encodePost x =
         [ ( "postId", Json.Encode.int x.postId )
         , ( "postName", Json.Encode.string x.postName )
         , ( "postAge", (Maybe.withDefault Json.Encode.null << Maybe.map Json.Encode.float) x.postAge )
-        , ( "postComments", (Json.Encode.list << List.map encodeComment) x.postComments )
+        , ( "postComments", (Json.Encode.list encodeComment) x.postComments )
         , ( "postPromoted", (Maybe.withDefault Json.Encode.null << Maybe.map encodeComment) x.postPromoted )
         , ( "postAuthor", (Maybe.withDefault Json.Encode.null << Maybe.map Json.Encode.string) x.postAuthor )
         ]

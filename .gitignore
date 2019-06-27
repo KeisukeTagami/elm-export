@@ -1,4 +1,5 @@
 /.stack-work/
+stack.yaml.lock
 /TAGS
 /test/elm-package.json
 /test/elm-stuff

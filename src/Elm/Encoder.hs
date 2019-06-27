@@ -68,7 +68,7 @@ instance HasEncoderRef ElmPrimitive where
   renderRef (EList (ElmPrimitive EChar)) = pure "Json.Encode.string"
   renderRef (EList datatype) = do
     dd <- renderRef datatype
-    return . parens $ "Json.Encode.list << List.map" <+> dd
+    return . parens $ "Json.Encode.list" <+> dd
   renderRef (EMaybe datatype) = do
     dd <- renderRef datatype
     return . parens $ "Maybe.withDefault Json.Encode.null << Maybe.map" <+> dd

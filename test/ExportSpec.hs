@@ -349,7 +349,7 @@ toElmEncoderSpec =
         toElmEncoderRef (Proxy :: Proxy Post) `shouldBe` "encodePost"
       it "toElmEncoderRef [Comment]" $
         toElmEncoderRef (Proxy :: Proxy [Comment]) `shouldBe`
-        "(Json.Encode.list << List.map encodeComment)"
+        "(Json.Encode.list encodeComment)"
       it "toElmEncoderRef String" $
         toElmEncoderRef (Proxy :: Proxy String) `shouldBe` "Json.Encode.string"
       it "toElmEncoderRef (Maybe String)" $
@@ -357,7 +357,7 @@ toElmEncoderSpec =
         "(Maybe.withDefault Json.Encode.null << Maybe.map Json.Encode.string)"
       it "toElmEncoderRef [Maybe String]" $
         toElmEncoderRef (Proxy :: Proxy [Maybe String]) `shouldBe`
-        "(Json.Encode.list << List.map (Maybe.withDefault Json.Encode.null << Maybe.map Json.Encode.string))"
+        "(Json.Encode.list (Maybe.withDefault Json.Encode.null << Maybe.map Json.Encode.string))"
       it "toElmEncoderRef (Map String (Maybe String))" $
         toElmEncoderRef (Proxy :: Proxy (Map String (Maybe String))) `shouldBe`
         "(dict Json.Encode.string (Maybe.withDefault Json.Encode.null << Maybe.map Json.Encode.string))"
